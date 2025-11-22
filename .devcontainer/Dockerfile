@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/devcontainers/rust:1-1-bullseye
+# CHANGE: Switch from 'bullseye' to 'bookworm' (Debian 12) for better compatibility
+FROM mcr.microsoft.com/devcontainers/rust:1-bookworm
 
 # Install generic tools + gRPC/Protobuf compiler
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -8,5 +9,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     protobuf-compiler \
     libprotobuf-dev
 
-# Pre-install global Cargo tools (optional)
-RUN cargo install cargo-expand cargo-edit
+# Install cargo-expand (using --locked to prevent dependency errors)
+# Note: Removed cargo-edit as it is largely built-in now
+RUN cargo install --locked cargo-expand

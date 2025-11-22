@@ -1,24 +1,26 @@
 {
-  "name": "Rust & TS Dev",
+  "name": "Rust & TS Monorepo",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspaces",
+
+  // FORCE ROOT HERE
+  "remoteUser": "root",
+  "containerUser": "root",
 
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "version": "lts"
     },
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "moby": false,
+      "installDockerBuildx": true
+    }
   },
 
-  // VS Code extensions removed as they are unnecessary for RustRover.
-  // If you ever need to force-install a JetBrains plugin (e.g. a specific theme),
-  // you can use this block:
   "customizations": {
     "jetbrains": {
-      "backend": "RustRover",
-      "plugins": [
-      ]
+      "backend": "RustRover"
     }
   },
 
